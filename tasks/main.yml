@@ -1,0 +1,24 @@
+---
+- name: Add certbot repository
+  apt_repository:
+    repo: 'ppa:certbot/certbot'
+    state: present
+
+- name: Install certbot
+  package:
+    name: letsencrypt
+    state: present
+
+- name: Install certbot-nginx plugin
+  package:
+    name: python-certbot-nginx
+    state: present
+
+- name: Check if certificate already exists
+  stat:
+    path: "/etc/letsencrypt/live/{{ domain_name }}/cert.pem"
+  register: letsencrypt_cert
+
+- name: Generate new certificate if one doesn't exist
+  shell: "certbot certonly --nginx --email {{ letsencrypt_email }} --agree-tos -d {{ domain_name }}"
+  when: not letsencrypt_cert.stat.exists
