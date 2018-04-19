@@ -20,5 +20,5 @@
   register: letsencrypt_cert
 
 - name: Generate new certificate if one doesn't exist
-  shell: "certbot certonly --nginx --email {{ letsencrypt_email }} --agree-tos -d {{ domain_name }}"
+  shell: "certbot certonly --nginx --email {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} {% if letsencrypt_staging %} --staging {% endif %}"
   when: not letsencrypt_cert.stat.exists
