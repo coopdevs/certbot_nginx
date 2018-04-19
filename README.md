@@ -34,7 +34,7 @@ This role includes `letsencrypt_staging` variable which defaults to `no`. For de
 for example by [Passing Variables On The Command Line](http://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#passing-variables-on-the-command-line) `--extra-vars "letsencrypt_staging=yes"`
 
 This will result in use of [Let's Encrypt Staging Environment](https://letsencrypt.org/docs/staging-environment/) and reducing chance of
-running up agains rate limits.
+running up against rate limits.
 
 License
 -------
