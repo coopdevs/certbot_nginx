@@ -14,7 +14,10 @@ Role Variables
 ```yaml
 domain_name: www.mydomain.io
 letsencrypt_email: myaccount@letsencrypt.org
+certbot_nginx_cert_name: mycert # optional
 ```
+
+if set, `certbot_nginx_cert_name`'s value will be passed to the certbot's `--cert-name` argument, which is used to identify the certificate in certbot command such as `certbot delete`. You will see a list of certificates identified with this name by running `certbot certificates`. This name will also be used as the file paths for the certificate in `/etc/letsencrypt/live/`.
 
 Example Playbook
 ----------------
@@ -25,6 +28,7 @@ Example Playbook
     - role: coopdevs.certbot-nginx
       domain_name: www.mydomain.io
       letsencrypt_email: myaccount@letsencrypt.org
+      certbot_nginx_cert_name: mycert
 ```
 
 Let's Encrypt Staging Environment
