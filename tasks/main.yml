@@ -6,12 +6,12 @@
 
 - name: Install certbot
   package:
-    name: letsencrypt
+    name: certbot=0.26.1-1+ubuntu16.04.1+certbot+2
     state: present
 
 - name: Install certbot-nginx plugin
   package:
-    name: python-certbot-nginx
+    name: python-certbot-nginx=0.25.0-2+ubuntu16.04.1+certbot+1
     state: present
 
 - name: Check if certificate already exists
