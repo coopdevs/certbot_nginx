@@ -16,7 +16,7 @@
 
 - name: Check if certificate already exists
   stat:
-    path: "/etc/letsencrypt/live/{{ certbot_nginx_cert_name | default(domain_name) }}/cert.pem"
+    path: "/etc/letsencrypt/live/{{ certbot_nginx_cert_name | default(domain_name, true) }}/cert.pem"
   register: letsencrypt_cert
 
 - name: Generate new certificate if one doesn't exist
