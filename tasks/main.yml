@@ -6,19 +6,19 @@
 
 - name: Install certbot
   package:
-    name: letsencrypt
+    name: "certbot=0.26.1-1+ubuntu{{ ansible_distribution_version }}.1+certbot+2"
     state: present
 
 - name: Install certbot-nginx plugin
   package:
-    name: python-certbot-nginx
+    name: "python-certbot-nginx=0.25.0-2+ubuntu{{ ansible_distribution_version }}.1+certbot+1"
     state: present
 
 - name: Check if certificate already exists
   stat:
-    path: "/etc/letsencrypt/live/{{ domain_name }}/cert.pem"
+    path: "/etc/letsencrypt/live/{{ certbot_nginx_cert_name | default(domain_name, true) }}/cert.pem"
   register: letsencrypt_cert
 
 - name: Generate new certificate if one doesn't exist
-  shell: "certbot certonly --nginx --cert-name {{ cert_name }} --email {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} {% if letsencrypt_staging %} --staging {% endif %}"
+  shell: "certbot certonly --nginx --email '{{ letsencrypt_email }}' --agree-tos -d '{{ domain_name }}' {% if certbot_nginx_cert_name %} --cert-name '{{ certbot_nginx_cert_name }}' {% endif %} {% if letsencrypt_staging %} --staging {% endif %}"
   when: not letsencrypt_cert.stat.exists
