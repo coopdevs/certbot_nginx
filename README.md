@@ -26,9 +26,10 @@ Example Playbook
 - hosts: servers
   roles:
     - role: coopdevs.certbot-nginx
-      domain_name: www.mydomain.io
-      letsencrypt_email: myaccount@letsencrypt.org
-      certbot_nginx_cert_name: mycert
+      vars:
+        domain_name: www.mydomain.io
+        letsencrypt_email: myaccount@letsencrypt.org
+        certbot_nginx_cert_name: mycert
 ```
 
 Let's Encrypt Staging Environment
