@@ -1,2 +1,4 @@
 ---
 letsencrypt_staging: false
+certbot_version: 0.31.0-1+ubuntu{{ ansible_distribution_version }}.1+certbot+1
+certbot_nginx_version: 0.31.0-1+ubuntu{{ ansible_distribution_version }}.1+certbot+1
