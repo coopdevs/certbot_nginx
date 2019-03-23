@@ -6,12 +6,12 @@
 
 - name: Install certbot
   package:
-    name: "certbot=0.31.0-1+ubuntu{{ ansible_distribution_version }}.1+certbot+1"
+    name: "certbot={{ certbot_version }}"
     state: present
 
 - name: Install certbot-nginx plugin
   package:
-    name: "python-certbot-nginx=0.31.0-1+ubuntu{{ ansible_distribution_version }}.1+certbot+1"
+    name: "python-certbot-nginx={{ certbot_nginx_version }}"
     state: present
 
 - import_tasks: certificate.yml
