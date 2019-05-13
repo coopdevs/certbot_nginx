@@ -27,7 +27,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: coopdevs.certbot-nginx
+    - role: coopdevs.certbot_nginx
       vars:
         domain_name: www.mydomain.io
         letsencrypt_email: myaccount@letsencrypt.org
