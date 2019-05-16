@@ -7,10 +7,7 @@ This role will:
 1. Add `certbot` PPA repository
 2. Install `certbot` and `python-certbot-nginx` packages
 3. `certbot` package will add a `renew` cron job and a systemd-timer ([More info](https://certbot.eff.org/#ubuntuxenial-nginx)
-4. Generate a Let's Encrypt SSL certificates for the given `domain_name` or `domain_names`.
-
-Also allow to generate and manage multiple certificates in the same host.
-You can define the var `domain_names` and configure a role to incude the this role in a loop. See [Multiple certificates creation](#example-playbook---multiple-certificates-creation) section.
+4. Generate a Let's Encrypt SSL certificates for the given `domain_name`.
 
 Role Variables
 --------------
@@ -25,7 +22,7 @@ certbot_nginx_version: 0.31.0-1+ubuntu{{ ansible_distribution_version }}.1+certb
 if set, `certbot_nginx_cert_name`'s value will be passed to the certbot's `--cert-name` argument, which is used to identify the certificate in certbot command such as `certbot delete`. You will see a list of certificates identified with this name by running `certbot certificates`. This name will also be used as the file paths for the certificate in `/etc/letsencrypt/live/`.
 
 Example Playbook - Single certificate
-----------------
+-------------------------------------
 
 ```yaml
 # Playbook
@@ -38,13 +35,16 @@ Example Playbook - Single certificate
 ```
 
 Example Playbook - Multiple certificates creation
------------------------------------------
+-------------------------------------------------
+
+Also allow to generate and manage multiple certificates in the same host.
+You can define the var `domain_names` and configure a role to incude the this role in a loop.
 
 ```yaml
 # Playbook
 - hosts: servers
   roles:
-    - role: coopdevs.certbot-nginx
+    - role: coopdevs.certbot_nginx
       vars:
         letsencrypt_email: myaccount@letsencrypt.org
     - role: certificates
