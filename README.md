@@ -70,6 +70,12 @@ Create a custom role including the `certbot_nginx` role that generates the certi
 
 > You need to declare the `loop_control` to map the `item` var of the `with_item` loop with the `loop_var` value as `domain_name`. See the [`loop_control` doc](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html?highlight=loop_control#loop-control)
 
+Updating Existing Certificates
+-------------------------------
+
+If the details for your site have changed since the certificate was created, you can update it by defining `certbot_force_update: true` or passing `--extra-vars "certbot_force_update=true"` via the commandline.
+
+
 Let's Encrypt Staging Environment
 ---------------------------------
 
