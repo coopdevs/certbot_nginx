@@ -13,3 +13,14 @@
     {% endif %}
     {% if letsencrypt_staging %} --staging {% endif %}"
   when: not letsencrypt_cert.stat.exists
+
+- name: Force generation of a new certificate
+  shell: >
+    "certbot certonly --force-renewal --nginx --email '{{ letsencrypt_email }}'
+    --agree-tos -d '{{ domain_name }}'
+    {% if certbot_nginx_cert_name is defined %}
+    --cert-name '{{ certbot_nginx_cert_name }}'
+    {% endif %}
+    {% if letsencrypt_staging %} --staging {% endif %}"
+  when: letsencrypt_cert.stat.exists and certbot_force_update is defined
+  notify: reload nginx
