@@ -68,7 +68,7 @@ Create a custom role including the `certbot_nginx` role that generates the certi
     loop_var: domain_name
 ```
 
-> You need to declare the `loop_control` to map the `item` var of the `with_item` loop with the `loop_var` value as `domain_name`. See the [`loop_controll` doc](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html?highlight=loop_control#loop-control)
+> You need to declare the `loop_control` to map the `item` var of the `with_item` loop with the `loop_var` value as `domain_name`. See the [`loop_control` doc](https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html?highlight=loop_control#loop-control)
 
 Let's Encrypt Staging Environment
 ---------------------------------
