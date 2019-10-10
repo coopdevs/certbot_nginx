@@ -4,7 +4,7 @@
     path: "/etc/letsencrypt/live/{{ certbot_nginx_cert_name | default(domain_name, true) }}/cert.pem"
   register: letsencrypt_cert
 
-- name: Generate new certificate if one doesn't exist
+- name: "Generate new certificate if one doesn't exist"
   shell: >
     certbot certonly --nginx --email '{{ letsencrypt_email }}'
     --agree-tos -d '{{ domain_name }}'
