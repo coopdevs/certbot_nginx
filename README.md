@@ -6,8 +6,14 @@ Simple Ansible role to install `certbot` with NGINX plugin on **Ubuntu 16.04** a
 This role will:
 1. Add `certbot` PPA repository
 2. Install `certbot` and `python-certbot-nginx` packages
-3. `certbot` package will add a `renew` cron job and a systemd-timer ([More info](https://certbot.eff.org/#ubuntuxenial-nginx)
+3. `certbot` package will add a `renew` cron job and a systemd-timer ([More info](https://certbot.eff.org/#ubuntuxenial-nginx))
 4. Generate a Let's Encrypt SSL certificates for the given `domain_name`.
+
+Warning
+-------
+If you already have Nginx installed with a site configured pointing to files in `/etc/letsencrypt` the certificate creation task will fail ([example](https://gitlab.com/coopdevs/odoo-lafeixa-inventory/-/blob/master/inventory/group_vars/all.yml#L37)).
+
+In general is recommended to execute this role before any other role installing and configuring Nginx.
 
 Role Variables
 --------------
