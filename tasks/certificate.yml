@@ -23,5 +23,5 @@
     {% endif %}
     {% if letsencrypt_staging %} --staging {% endif %}
     {% if ansible_distribution_version >= "20.04" %} --non-interactive {% endif %}
-  when: letsencrypt_cert.stat.exists and certbot_force_update == true
+  when: letsencrypt_cert.stat.exists and certbot_force_update | bool
   notify: reload nginx

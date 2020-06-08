@@ -1,5 +1,4 @@
 ---
-
 - name: Set Certbot package name and versions (Ubuntu >= 20.04)
   set_fact:
     certbot_version: 0.40.0-1
