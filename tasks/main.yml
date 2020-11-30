@@ -1,7 +1,7 @@
 ---
 - name: Set Certbot package name and versions (Ubuntu >= 20.04)
   set_fact:
-    certbot_version: 0.40.0-1
+    certbot_version: 0.40.0-1ubuntu0.1
     certbot_nginx_version: 0.40.0-0ubuntu0.1
     certbot_nginx_name: python3-certbot-nginx
   when: ansible_distribution_version >= "20.04"
