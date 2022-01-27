@@ -14,6 +14,23 @@
     {% if letsencrypt_staging %} --staging {% endif %}
   when: not letsencrypt_cert.stat.exists
 
+# Check if we need or don't need to force the generation of a new certificate
+- name: Extract current domains list from the certificate
+  shell: >
+    sudo certbot certificates | grep 'Domains:' | sed 's/\s*Domains: //'
+  register: old_domains_raw
+  when: certbot_force_update is not defined
+
+- name: Extract domains list
+  set_fact:
+    old_domains: "{{ old_domains_raw['stdout'].split(' ') | sort }}"
+  when: certbot_force_update is not defined
+
+- name: Compare domains with domains in certificate
+  set_fact:
+    certbot_force_update: "{{ old_domains | symmetric_difference(domains) | length | bool }}"
+  when: certbot_force_update is not defined
+
 - name: Force generation of a new certificate
   shell: >
     certbot certonly --force-renewal --nginx --email '{{ letsencrypt_email }}'
