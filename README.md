@@ -79,7 +79,7 @@ Create a custom role including the `certbot_nginx` role that generates the certi
 Updating Existing Certificates
 -------------------------------
 
-If the details for your site have changed since the certificate was created, you can update it by defining `certbot_force_update: true` or passing `--extra-vars "certbot_force_update=true"` via the commandline.
+If the details for your site have changed since the certificate was created, you can update the domains list and the role checks the difference between the domains presents in the certificate and the list of domains provided and choose if need to renew the certificate or not. If you want to force the renewal process, you can do it by defining `certbot_force_update: true` or passing `--extra-vars "certbot_force_update=true"` via the commandline.
 
 
 Let's Encrypt Staging Environment
