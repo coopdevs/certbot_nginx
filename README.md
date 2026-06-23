@@ -2,13 +2,16 @@ Certbot NGINX [![Build Status](https://travis-ci.org/coopdevs/certbot_nginx.svg?
 =========
 
 Simple Ansible role to install `certbot` with NGINX plugin on:
+
 * **Ubuntu 16.04**
 * **Ubuntu 18.04**.
 * **Ubuntu 20.04**.
 * **Ubuntu 22.04**.
 * **Ubuntu 24.04**.
+* **Ubuntu 26.04**.
 
 This role will:
+
 1. Add `certbot` PPA repository
 2. Install `certbot` and `python-certbot-nginx` packages
 3. `certbot` package will add a `renew` cron job and a systemd-timer ([More info](https://certbot.eff.org/#ubuntuxenial-nginx))
@@ -16,14 +19,17 @@ This role will:
 
 Warning
 -------
+
 If you already have Nginx installed with a site configured pointing to files in `/etc/letsencrypt` the certificate creation task will fail ([example](https://gitlab.com/coopdevs/odoo-lafeixa-inventory/-/blob/master/inventory/group_vars/all.yml#L37)).
 
 In general is recommended to execute this role before any other role installing and configuring Nginx.
 
 Role Variables
 --------------
+
 ```yaml
-domain_name: www.mydomain.io
+domains:
+  - www.mydomain.io
 letsencrypt_email: myaccount@letsencrypt.org
 certbot_nginx_cert_name: mycert # optional
 certbot_version: 0.31.0-1+ubuntu{{ ansible_distribution_version }}.1+certbot+1 # optional
@@ -41,7 +47,7 @@ Example Playbook - Single certificate
   roles:
     - role: coopdevs.certbot_nginx
       vars:
-        domain_name: www.mydomain.io
+        domains: www.mydomain.io
         letsencrypt_email: myaccount@letsencrypt.org
 ```
 
@@ -60,7 +66,7 @@ You can define the var `domain_names` and configure a role to incude the this ro
         letsencrypt_email: myaccount@letsencrypt.org
     - role: certificates
       vars:
-        domain_names:
+        domains:
           - community.coopdevs.org
           - forms.coopdevs.org
 ```
@@ -86,7 +92,6 @@ Updating Existing Certificates
 
 If the details for your site have changed since the certificate was created, you can update the domains list and the role checks the difference between the domains presents in the certificate and the list of domains provided and choose if need to renew the certificate or not. If you want to force the renewal process, you can do it by defining `certbot_force_update: true` or passing `--extra-vars "certbot_force_update=true"` via the commandline.
 
-
 Let's Encrypt Staging Environment
 ---------------------------------
 
@@ -104,4 +109,4 @@ BSD
 Author Information
 ------------------
 
-Coopdevs http://coopdevs.org
+Coopdevs <http://coopdevs.org>
