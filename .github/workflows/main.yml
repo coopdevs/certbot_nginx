@@ -1,14 +1,24 @@
-name: Publish Ansible role to Galaxy
+---
+name: Galaxy-NG Roles Import
+
+# yamllint disable-line rule:truthy
 on:
   release:
-      types: [published]
+    types: ["created"]
+
 jobs:
   build:
+    name: Galaxy Role Importer
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: galaxy
-        uses: robertdebock/galaxy-action@1.2.1
+      - name: "Checkout git repo"
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: "Release on galaxy"
+        uses: ansible-actions/ansible-galaxy-action@v1.2.0
         with:
           galaxy_api_key: ${{ secrets.galaxy_api_key }}
